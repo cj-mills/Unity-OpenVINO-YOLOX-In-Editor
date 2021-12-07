@@ -64,6 +64,7 @@ public class BoundingBox
     public void ToggleBBox(bool show)
     {
         renderBox = show;
+        bbox.SetActive(show);
         text.SetActive(show);
     }
 
