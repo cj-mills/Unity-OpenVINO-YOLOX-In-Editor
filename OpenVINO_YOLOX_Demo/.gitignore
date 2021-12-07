@@ -2,4 +2,6 @@ Build/*
 Logs/*
 cache/*
 Logs/*
+Temp/*
+Libarary/*
 # Assets/StreamingAssets/*
