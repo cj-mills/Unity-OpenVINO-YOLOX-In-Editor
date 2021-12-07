@@ -14,18 +14,22 @@ public class BoundingBox
     private Utils.Object info;
 
     // The object class color
-    private Color color;
+    public Color color;
 
     // The adjusted line width for the bounding box
-    private int lineWidth = (int)(Screen.width * 1.75e-3);
+    public int lineWidth = (int)(Screen.width * 1.75e-3);
     // The adjusted font size based on the screen size
     private float fontSize = (float)(Screen.width * 9e-3);
 
     // The label text
     private TextMeshProUGUI textContent;
 
-    // Draws the bounding box
-    private LineRenderer lineRenderer;
+
+    public bool renderBox = false;
+
+    // The bounding box
+    public Rect boxRect = new Rect();
+    public Texture2D boxTex = Texture2D.whiteTexture;
 
 
     /// <summary>
@@ -46,7 +50,7 @@ public class BoundingBox
         RectTransform rectTransform = text.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(250, 50);
         // Position the label above the top left corner of the bounding box
-        Vector3 textPos = Camera.main.WorldToScreenPoint(new Vector3(info.x0, info.y0, -10f));
+        Vector3 textPos = new Vector3(info.x0, info.y0, -10f);
         float xOffset = rectTransform.rect.width / 2;
         textPos = new Vector3(textPos.x + xOffset, textPos.y + textContent.fontSize, textPos.z);
         text.transform.position = textPos;
@@ -58,7 +62,7 @@ public class BoundingBox
     /// <param name="show"></param>
     public void ToggleBBox(bool show)
     {
-        bbox.SetActive(show);
+        renderBox = show;
         text.SetActive(show);
     }
 
@@ -67,44 +71,18 @@ public class BoundingBox
     /// </summary>
     private void InitializeBBox()
     {
-        // Set the material color
-        lineRenderer.material.color = color;
-
-        // The bbox will consist of five points
-        lineRenderer.positionCount = 5;
-
-        // Set the width from the start point
-        lineRenderer.startWidth = lineWidth;
-        // Set the width from the end point
-        lineRenderer.endWidth = lineWidth;
-
         // Get object information
         float x0 = info.x0;
         float y0 = info.y0;
         float width = info.width;
         float height = info.height;
 
-        // Offset value to align the bounding box points
-        float offset = lineWidth / 2;
-
-        // Top left point
-        Vector3 pos0 = new Vector3(x0, y0, 0);
-        lineRenderer.SetPosition(0, pos0);
-        // Top right point
-        Vector3 pos1 = new Vector3(x0 + width, y0, 0);
-        lineRenderer.SetPosition(1, pos1);
-        // Bottom right point
-        Vector3 pos2 = new Vector3(x0 + width, (y0 - height) + offset, 0);
-        lineRenderer.SetPosition(2, pos2);
-        // Bottom left point
-        Vector3 pos3 = new Vector3(x0 + offset, (y0 - height) + offset, 0);
-        lineRenderer.SetPosition(3, pos3);
-        // Closing Point
-        Vector3 pos4 = new Vector3(x0 + offset, y0 + offset, 0);
-        lineRenderer.SetPosition(4, pos4);
+        boxRect = new Rect(x0, Screen.height - y0, width, height);
 
         // Make sure the bounding box is visible
         ToggleBBox(true);
+
+
     }
 
     /// <summary>
@@ -138,12 +116,10 @@ public class BoundingBox
         // Assign text object to the label canvas
         text.transform.SetParent(canvas.transform);
 
-        // Add a line renderer to draw the bounding box
-        lineRenderer = bbox.AddComponent<LineRenderer>();
-        // Make LineRenderer Shader Unlit
-        lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
-
         // Update the object info for the bounding box
         SetObjectInfo(objectInfo);
     }
+
+
+    
 }
