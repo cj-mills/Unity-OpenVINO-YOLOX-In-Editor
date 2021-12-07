@@ -24,11 +24,12 @@ public class BoundingBox
     // The label text
     private TextMeshProUGUI textContent;
 
-
+    // Indicates whether to render the bounding box on screen
     public bool renderBox = false;
 
     // The bounding box
     public Rect boxRect = new Rect();
+    // The texture used for rendering the bounding box on screen
     public Texture2D boxTex = Texture2D.whiteTexture;
 
 
@@ -71,18 +72,11 @@ public class BoundingBox
     /// </summary>
     private void InitializeBBox()
     {
-        // Get object information
-        float x0 = info.x0;
-        float y0 = info.y0;
-        float width = info.width;
-        float height = info.height;
+        // Set the position and dimensions
+        boxRect = new Rect(info.x0, Screen.height - info.y0, info.width, info.height);
 
-        boxRect = new Rect(x0, Screen.height - y0, width, height);
-
-        // Make sure the bounding box is visible
+        // Make sure the bounding box is rendered
         ToggleBBox(true);
-
-
     }
 
     /// <summary>
@@ -119,7 +113,4 @@ public class BoundingBox
         // Update the object info for the bounding box
         SetObjectInfo(objectInfo);
     }
-
-
-    
 }
