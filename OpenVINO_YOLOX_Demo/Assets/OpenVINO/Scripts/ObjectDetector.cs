@@ -43,8 +43,6 @@ public class ObjectDetector : MonoBehaviour
     [Tooltip("List of available video files")]
     public VideoClip[] videoClips;
 
-    
-
 
     // Name of the DLL file
     const string dll = "OpenVINO_YOLOX_DLL";
@@ -243,45 +241,24 @@ public class ObjectDetector : MonoBehaviour
     /// <param name="newVideo"></param>
     private void InitializeTextures(bool newVideo = false)
     {
-        if (newVideo)
+        // Adjust the input dimensions to maintain the current aspect ratio
+        if (imageDims.x != targetDims.x)
         {
-            // Calculate scale for new  aspect ratio
-            int min = Mathf.Min(videoTexture.width, videoTexture.height);
-            int max = Mathf.Max(videoTexture.width, videoTexture.height);
-            aspectRatioScale = (float)min / max;
+            imageDims.x = targetDims.x;
+            aspectRatioScale = (float)Screen.height / Screen.width;
+            imageDims.y = (int)(targetDims.x * aspectRatioScale);
+            targetDims.y = imageDims.y;
 
-            // Adjust the smallest input dimension to maintain the new aspect ratio
-            if (max == videoTexture.height)
-            {
-                imageDims.x = (int)(targetDims.y * aspectRatioScale);
-                imageDims.y = targetDims.y;
-            }
-            else
-            {
-                imageDims.y = (int)(targetDims.x * aspectRatioScale);
-                imageDims.x = targetDims.x;
-            }
         }
-        else
+        if (imageDims.y != targetDims.y)
         {
-            // Adjust the input dimensions to maintain the current aspect ratio
-            if (imageDims.x != targetDims.x)
-            {
-                imageDims.x = targetDims.x;
-                aspectRatioScale = (float)videoTexture.height / videoTexture.width;
-                imageDims.y = (int)(targetDims.x * aspectRatioScale);
-                targetDims.y = imageDims.y;
+            imageDims.y = targetDims.y;
+            aspectRatioScale = (float)Screen.width / Screen.height;
+            imageDims.x = (int)(targetDims.y * aspectRatioScale);
+            targetDims.x = imageDims.x;
 
-            }
-            if (imageDims.y != targetDims.y)
-            {
-                imageDims.y = targetDims.y;
-                aspectRatioScale = (float)videoTexture.width / videoTexture.height;
-                imageDims.x = (int)(targetDims.y * aspectRatioScale);
-                targetDims.x = imageDims.x;
-
-            }
         }
+
 
         // Initialize the RenderTexture that will store the processed input image
         rTex = RenderTexture.GetTemporary(imageDims.x, imageDims.y, 24, RenderTextureFormat.ARGB32);
@@ -321,6 +298,8 @@ public class ObjectDetector : MonoBehaviour
         modelDropdown.SetValueWithoutNotify(0);
     }
 
+
+
     /// <summary>
     /// Called when a model option is selected from the dropdown
     /// </summary>
@@ -345,6 +324,8 @@ public class ObjectDetector : MonoBehaviour
         Debug.Log($"OpenVINO using: {currentDevice}");
     }
 
+
+
     /// <summary>
     /// Perform the initialization steps required when the model input is updated
     /// </summary>
@@ -366,6 +347,7 @@ public class ObjectDetector : MonoBehaviour
             // Update the videoDims.x
             videoDims.x = (int)videoScreen.GetComponent<VideoPlayer>().width;
         }
+
 
         // Create a new videoTexture using the current video dimensions
         videoTexture = RenderTexture.GetTemporary(videoDims.x, videoDims.y, 24, RenderTextureFormat.ARGB32);
@@ -538,9 +520,8 @@ public class ObjectDetector : MonoBehaviour
         // Process new detected objects
         for (int i = 0; i < objectInfoArray.Length; i++)
         {
-            // The smallest dimension of the videoTexture
-            int minDimension = Mathf.Min(videoTexture.width, videoTexture.height);
-
+            // The smallest dimension of the screen
+            int minDimension = Mathf.Min(Screen.width, Screen.height);
             // The value used to scale the bbox locations up to the source resolution
             float scale = (float)minDimension / Mathf.Min(imageDims.x, imageDims.y);
 
@@ -585,33 +566,6 @@ public class ObjectDetector : MonoBehaviour
 
         // Copy webcamTexture to videoTexture if using webcam
         if (useWebcam.isOn) Graphics.Blit(webcamTexture, videoTexture);
-
-        // Toggle whether to perform inference
-        if (performInference == false) return;
-
-        // Copy the videoTexture to the rTex RenderTexture
-        Graphics.Blit(videoTexture, rTex);
-
-        // Flip image before sending to DLL
-        FlipImage(rTex, "FlipXAxis");
-
-        // Download pixel data from GPU to CPU
-        if (useAsync.isOn)
-        {
-            AsyncGPUReadback.Request(rTex, 0, TextureFormat.RGBA32, OnCompleteReadback);
-        }
-        else
-        {
-            RenderTexture.active = rTex;
-            inputTex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
-            inputTex.Apply();
-        }
-
-        // Send reference to inputData to DLL
-        UploadTexture(inputTex.GetRawTextureData());
-
-        // Update bounding boxes with new object info
-        UpdateBoundingBoxes();
     }
 
     /// <summary>
@@ -744,5 +698,56 @@ public class ObjectDetector : MonoBehaviour
     {
         // Causes the application to exit
         Application.Quit();
+    }
+
+
+
+    public void OnRenderImage(RenderTexture source, RenderTexture destination)
+    {
+        if (performInference == true)
+        {
+            // Copy the source to the rTex RenderTexture
+            Graphics.Blit(source, rTex);
+
+
+            // Flip image before sending to DLL
+            FlipImage(rTex, "FlipXAxis");
+
+            // Download pixel data from GPU to CPU
+            if (useAsync.isOn)
+            {
+                AsyncGPUReadback.Request(rTex, 0, TextureFormat.RGBA32, OnCompleteReadback);
+            }
+            else
+            {
+                RenderTexture.active = rTex;
+                inputTex.ReadPixels(new Rect(0, 0, rTex.width, rTex.height), 0, 0);
+                inputTex.Apply();
+            }
+
+            // Send reference to inputData to DLL
+            UploadTexture(inputTex.GetRawTextureData());
+
+            // Update bounding boxes with new object info
+            UpdateBoundingBoxes();
+        }
+
+        
+
+        Graphics.Blit(source, destination);
+    }
+
+    public void OnGUI()
+    {
+        if (performInference == false) return;
+
+        foreach (BoundingBox boundingBox in boundingBoxes)
+        {
+            if (boundingBox.renderBox)
+            {
+                GUI.DrawTexture(boundingBox.boxRect, boundingBox.boxTex, ScaleMode.StretchToFill, 
+                    true, 0, boundingBox.color, 3, boundingBox.lineWidth);
+            }
+        }
     }
 }
