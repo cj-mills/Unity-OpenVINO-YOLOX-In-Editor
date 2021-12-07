@@ -123,71 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &412647271
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 412647273}
-  - component: {fileID: 412647272}
-  m_Layer: 0
-  m_Name: Object Detector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &412647272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412647271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85ab63e46c2f3e045a92664b5311a9c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoScreen: {fileID: 1223598104}
-  imageProcessingShader: {fileID: 7200000, guid: 3a534990e7346f147a9cca3aef65d000, type: 3}
-  deviceDropdown: {fileID: 1488488204380101154}
-  modelDropdown: {fileID: 2643149661864116638}
-  videoDropdown: {fileID: 1488488203660301233}
-  inference: {fileID: 2643149662920825944}
-  useWebcam: {fileID: 1488488205562756140}
-  useAsync: {fileID: 2643149661894452693}
-  canvas: {fileID: 2643149663400600540}
-  width: {fileID: 4383690381859276476}
-  height: {fileID: 4383690381985509237}
-  videoClips:
-  - {fileID: 32900000, guid: 64b6b0adc8e0dc4438de6f13a3ff2680, type: 3}
-  - {fileID: 32900000, guid: 0e7a88de3e8775b4d865f546c0caeca6, type: 3}
-  - {fileID: 32900000, guid: 73c28e376dd0a5c47b621486555db2a7, type: 3}
-  - {fileID: 32900000, guid: d2cf31e893dcebe41b1342304aec3d01, type: 3}
-  - {fileID: 32900000, guid: 0730ea2ca6fe4df48b3d8c6b54bd1ec7, type: 3}
-  - {fileID: 32900000, guid: c34e78584c088234fa4627b605a6cd3a, type: 3}
-  - {fileID: 32900000, guid: 9fb68ca5f718bcd49a761f2467d1167e, type: 3}
-  - {fileID: 32900000, guid: c7f1745e77fec8840a00db46d12f8292, type: 3}
-  - {fileID: 32900000, guid: a11530cac256d6e41902e2e323741d7d, type: 3}
-  - {fileID: 32900000, guid: 8095fabfa49ea4a4cac43ec5d24c9235, type: 3}
---- !u!4 &412647273
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412647271}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,6 +326,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -463,6 +399,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85ab63e46c2f3e045a92664b5311a9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoScreen: {fileID: 1223598104}
+  imageProcessingShader: {fileID: 7200000, guid: 3a534990e7346f147a9cca3aef65d000, type: 3}
+  deviceDropdown: {fileID: 1488488204380101154}
+  modelDropdown: {fileID: 2643149661864116638}
+  videoDropdown: {fileID: 1488488203660301233}
+  inference: {fileID: 2643149662920825944}
+  useWebcam: {fileID: 1488488205562756140}
+  useAsync: {fileID: 2643149661894452693}
+  canvas: {fileID: 2643149663400600540}
+  width: {fileID: 4383690381859276476}
+  height: {fileID: 4383690381985509237}
+  videoClips:
+  - {fileID: 32900000, guid: 64b6b0adc8e0dc4438de6f13a3ff2680, type: 3}
+  - {fileID: 32900000, guid: 0e7a88de3e8775b4d865f546c0caeca6, type: 3}
+  - {fileID: 32900000, guid: 73c28e376dd0a5c47b621486555db2a7, type: 3}
+  - {fileID: 32900000, guid: d2cf31e893dcebe41b1342304aec3d01, type: 3}
+  - {fileID: 32900000, guid: 0730ea2ca6fe4df48b3d8c6b54bd1ec7, type: 3}
+  - {fileID: 32900000, guid: c34e78584c088234fa4627b605a6cd3a, type: 3}
+  - {fileID: 32900000, guid: 9fb68ca5f718bcd49a761f2467d1167e, type: 3}
+  - {fileID: 32900000, guid: c7f1745e77fec8840a00db46d12f8292, type: 3}
+  - {fileID: 32900000, guid: a11530cac256d6e41902e2e323741d7d, type: 3}
+  - {fileID: 32900000, guid: 8095fabfa49ea4a4cac43ec5d24c9235, type: 3}
 --- !u!1 &1223598099
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,7 +1037,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateVideo
         m_Mode: 1
@@ -1328,7 +1298,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateConfThreshold
         m_Mode: 2
@@ -3005,7 +2975,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: InitializeOpenVINO
         m_Mode: 1
@@ -3179,7 +3149,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateNMSThreshold
         m_Mode: 2
@@ -5189,7 +5159,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UseWebcam
         m_Mode: 1
@@ -5895,7 +5865,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: InitializeOpenVINO
         m_Mode: 1
@@ -6936,7 +6906,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateInferenceValue
         m_Mode: 1
@@ -7476,7 +7446,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -8345,7 +8315,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateInputDims
         m_Mode: 1
@@ -8904,7 +8874,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 412647272}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateInputDims
         m_Mode: 1
