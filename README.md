@@ -14,3 +14,8 @@ The large .bin files that contain the model weights get corrupted when downloadi
 ## Tutorial Links
 
 * [OpenVINO Object Detection in the Unity Editor](https://christianjmills.com/OpenVINO-Object-Detection-for-Unity-Tutorial-In-Editor/)
+
+
+## Follow Ups
+### Use the in-game camera as input
+* [GitHub Branch](https://github.com/cj-mills/Unity-OpenVINO-YOLOX-In-Editor/tree/in-game-camera)
