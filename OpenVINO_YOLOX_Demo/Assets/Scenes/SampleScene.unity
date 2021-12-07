@@ -8315,7 +8315,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateInputDims
         m_Mode: 1
@@ -8874,7 +8874,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 963194229}
         m_TargetAssemblyTypeName: ObjectDetector, Assembly-CSharp
         m_MethodName: UpdateInputDims
         m_Mode: 1
