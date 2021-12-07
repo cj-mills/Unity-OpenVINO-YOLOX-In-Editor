@@ -691,6 +691,7 @@ public class ObjectDetector : MonoBehaviour
         FreeResources();
     }
 
+
     /// <summary>
     /// Called when the Quit button is clicked.
     /// </summary>
@@ -699,7 +700,6 @@ public class ObjectDetector : MonoBehaviour
         // Causes the application to exit
         Application.Quit();
     }
-
 
 
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
