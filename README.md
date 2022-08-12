@@ -4,7 +4,7 @@
 
 * This tutorial is outdated. Use the new version at the link below.
 * [End-to-End Object Detection for Unity With IceVision and OpenVINO Pt. 1](https://christianjmills.com/IceVision-to-OpenVINO-to-Unity-Tutorial-1/)
-
+------
 ![OpenVINO_YOLOX_Plugin_In-Editor](https://github.com/cj-mills/Unity-OpenVINO-YOLOX-In-Editor/raw/main/images/yolox_in-editor.gif)
 
 This follow up tutorial updates the code and OpenVINO version so that the plugin can run in the Unity Editor. It also removes the need to manually move any files to the run build executable.
