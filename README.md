@@ -3,7 +3,7 @@
 ### 8/11/2022:
 
 * This tutorial is outdated. Use the new version at the link below.
-* [End-to-End Object Detection for Unity With IceVision and OpenVINO Pt. 1]([https://christianjmills.com/IceVision-to-OpenVINO-to-Unity-Tutorial-1/](https://christianjmills.com/posts/icevision-openvino-unity-tutorial/part-1/))
+* [End-to-End Object Detection for Unity With IceVision and OpenVINO Pt. 1](https://christianjmills.com/posts/icevision-openvino-unity-tutorial/part-1/)
 ------
 ![OpenVINO_YOLOX_Plugin_In-Editor](https://github.com/cj-mills/Unity-OpenVINO-YOLOX-In-Editor/raw/main/images/yolox_in-editor.gif)
 
