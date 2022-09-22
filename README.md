@@ -19,7 +19,7 @@ The large .bin files that contain the model weights get corrupted when downloadi
 
 ## Tutorial Links
 
-* [OpenVINO Object Detection in the Unity Editor](https://christianjmills.com/OpenVINO-Object-Detection-for-Unity-Tutorial-In-Editor/)
+* [OpenVINO Object Detection in the Unity Editor](https://christianjmills.com/posts/openvino-yolox-unity/in-editor/)
 
 
 ## Follow Ups
